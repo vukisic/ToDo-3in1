@@ -1,0 +1,29 @@
+<div class="row mt-5">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.name }}</td>
+          <td *ngIf="task.priority == '1'">High</td>
+          <td *ngIf="task.priority == '2'">Medium</td>
+          <td *ngIf="task.priority == '3'">Low</td>
+          <td *ngIf="task.status == '1'">To Do</td>
+          <td *ngIf="task.status == '2'">In Progress</td>
+          <td *ngIf="task.status == '3'">Done</td>
+          <td>
+            <button class="btn btn-sm btn-danger mx-1">Remove</button>
+            <button class="btn btn-sm btn-warning mx-1">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

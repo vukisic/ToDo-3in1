@@ -8,9 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MainTitleComponent } from './components/main-title/main-title.component';
 import { TodoFormComponent } from './components/todo-form/todo-form.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
 
 @NgModule({
-  declarations: [AppComponent, MainTitleComponent, TodoFormComponent],
+  declarations: [AppComponent, MainTitleComponent, TodoFormComponent, TodoListComponent],
   imports: [BrowserModule, AppRoutingModule, NgbModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
