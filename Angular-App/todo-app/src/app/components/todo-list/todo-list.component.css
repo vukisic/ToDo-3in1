@@ -1,0 +1,15 @@
+.high-priority {
+  color: red;
+}
+
+.medium-priority {
+  color: gold;
+}
+
+.low-priority {
+  color: greenyellow;
+}
+
+.left-align {
+  text-align: left;
+}

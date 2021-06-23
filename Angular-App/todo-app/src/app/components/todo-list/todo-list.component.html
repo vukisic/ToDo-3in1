@@ -5,7 +5,9 @@
         <tr>
           <th>Task</th>
           <th>Priority</th>
+          <th></th>
           <th>Status</th>
+          <th></th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -15,12 +17,36 @@
           <td *ngIf="task.priority == '1'">High</td>
           <td *ngIf="task.priority == '2'">Medium</td>
           <td *ngIf="task.priority == '3'">Low</td>
+          <td *ngIf="task.priority == '1'">
+            <i class="fa fa-circle high-priority mx-1"></i>
+          </td>
+          <td *ngIf="task.priority == '2'">
+            <i class="fa fa-circle medium-priority mx-1"></i>
+          </td>
+          <td *ngIf="task.priority == '3'">
+            <i class="fa fa-circle low-priority mx-1"></i>
+          </td>
           <td *ngIf="task.status == '1'">To Do</td>
           <td *ngIf="task.status == '2'">In Progress</td>
           <td *ngIf="task.status == '3'">Done</td>
+          <td *ngIf="task.status == '1'"><i class="fa fa-times"></i></td>
+          <td *ngIf="task.status == '2'"><i class="fa fa-spinner"></i></td>
+          <td *ngIf="task.status == '3'"><i class="fa fa-check"></i></td>
           <td>
-            <button class="btn btn-sm btn-danger mx-1">Remove</button>
-            <button class="btn btn-sm btn-warning mx-1">Edit</button>
+            <button
+              (click)="onDelete(task.id)"
+              type="button"
+              class="btn btn-sm btn-danger mx-1"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+            <button
+              (click)="onEdit(task.id)"
+              type="button"
+              class="btn btn-sm btn-warning mx-1"
+            >
+              <i class="fa fa-pencil"></i>
+            </button>
           </td>
         </tr>
       </tbody>

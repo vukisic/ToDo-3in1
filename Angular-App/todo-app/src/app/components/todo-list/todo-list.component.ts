@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'todo-list',
@@ -6,25 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-  tasks: any[] = [
-    {
-      name: 'Taks 1',
-      priority: '1',
-      status: '1',
-    },
-    {
-      name: 'Taks 2',
-      priority: '2',
-      status: '2',
-    },
-    {
-      name: 'Taks 3',
-      priority: '3',
-      status: '3',
-    },
-  ];
+  @Input() tasks: any[] = [];
+  @Output() deleteEvent = new EventEmitter<any>();
+  @Output() editEvent = new EventEmitter<any>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onDelete(id: any): void {
+    this.deleteEvent.emit(id);
+  }
+
+  onEdit(id: any): void {
+    this.editEvent.emit(id);
+  }
 }

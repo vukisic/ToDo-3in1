@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -7,11 +7,15 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./todo-form.component.css'],
 })
 export class TodoFormComponent implements OnInit {
+  @Output() addEvent = new EventEmitter<any>();
+  @Output() saveEvent = new EventEmitter<any>();
   taskForm = this.fb.group({
     taskName: ['', Validators.required],
     taskPriority: ['', Validators.required],
     taskStatus: ['', Validators.required],
   });
+  isEdit: boolean = false;
+  editId: any;
 
   get taskName() {
     return this.taskForm.get('taskName');
@@ -31,9 +35,23 @@ export class TodoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.taskForm.valid) {
-      console.log(this.taskName?.value);
-      console.log(this.taskPriority?.value);
-      console.log(this.taskStatus?.value);
+      if (this.isEdit) {
+        this.saveEvent.emit({
+          id: this.editId,
+          name: this.taskName?.value,
+          priority: this.taskPriority?.value,
+          status: this.taskStatus?.value,
+        });
+        this.isEdit = false;
+        this.editId = undefined;
+      } else {
+        this.addEvent.emit({
+          name: this.taskName?.value,
+          priority: this.taskPriority?.value,
+          status: this.taskStatus?.value,
+        });
+      }
+
       this.resetForm();
     } else {
       console.log('Invalid');
@@ -46,6 +64,17 @@ export class TodoFormComponent implements OnInit {
       taskName: '',
       taskPriority: '',
       taskStatus: '',
+    });
+  }
+
+  public onEdit(item: any): void {
+    this.isEdit = true;
+    this.taskForm.reset();
+    this.editId = item.id;
+    this.taskForm.patchValue({
+      taskName: item.name,
+      taskPriority: item.priority,
+      taskStatus: item.status,
     });
   }
 }
