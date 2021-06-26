@@ -4,11 +4,22 @@ import MainTitle from "./components/MainTitle.js";
 import ToDoForm from "./components/ToDoForm.js";
 
 function App() {
-  const [name, setName] = useState({ value: "", error: "" });
+  const [form, setForm] = useState({
+    name: { value: "", error: "" },
+    priority: { value: "", error: "" },
+    status: { value: "", error: "" },
+  });
+
+  const [todos, setToDos] = useState([]);
   return (
     <div className="App container">
       <MainTitle />
-      <ToDoForm name={name} setName={setName} />
+      <ToDoForm
+        form={form}
+        setForm={setForm}
+        todos={todos}
+        setToDos={setToDos}
+      />
     </div>
   );
 }
