@@ -27,7 +27,21 @@
 .App-link {
   color: #61dafb;
 }
+.high-priority {
+  color: red;
+}
 
+.medium-priority {
+  color: gold;
+}
+
+.low-priority {
+  color: greenyellow;
+}
+
+.left-align {
+  text-align: left;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -53,19 +53,39 @@ const ToDoForm = ({ form, setForm, todos, setToDos }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    todos.push({
-      id: Math.random() * 1000,
-      name: form.name.value,
-      priority: form.priority.value,
-      status: form.status.value,
-    });
-    setToDos(todos);
-    setForm({
-      name: { value: "", error: "" },
-      priority: { value: "", error: "" },
-      status: { value: "", error: "" },
-    });
-    console.log(todos);
+    if (form.id === null) {
+      todos.push({
+        id: Math.random() * 1000,
+        name: form.name.value,
+        priority: form.priority.value,
+        status: form.status.value,
+      });
+      setToDos(todos);
+      setForm({
+        id: null,
+        name: { value: "", error: "" },
+        priority: { value: "", error: "" },
+        status: { value: "", error: "" },
+      });
+      localStorage.setItem("todos", JSON.stringify(todos));
+    } else {
+      todos.forEach((x) => {
+        if (x.id === form.id) {
+          x.name = form.name.value;
+          x.priority = form.priority.value;
+          x.status = form.status.value;
+          return;
+        }
+      });
+      setToDos(todos);
+      setForm({
+        id: null,
+        name: { value: "", error: "" },
+        priority: { value: "", error: "" },
+        status: { value: "", error: "" },
+      });
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
   };
 
   const isDisabled = () => {
